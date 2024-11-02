@@ -82,7 +82,7 @@ http://user:pass@127.0.0.1:6969
 5. Сopy this code in Console for getting tgWebAppData (user= / query=):
 
 ```javascript
-copy(Telegram.WebApp.initData)
+copy(decodeURIComponent(sessionStorage['telegram-apps/launch-params']).split('tgWebAppData=')[1].split('&tgWebAppStartParam')[0])
 ```
 
 6. you will get data that looks like this
