@@ -297,12 +297,13 @@ class FreeDOGS:
             return None
         return tokens[str(id)]
 
-    def process_query(self, query: str, id:str):
+    def process_query(self, query: str, id:str, user_name:str):
 
         token = self.get_token(id)
         if token is None:
             token = self.user_auth(query)
             if token is None:
+
                 return
             self.save_token(id, token)
 
@@ -313,6 +314,7 @@ class FreeDOGS:
             if mine_info:
                 self.log(
                     f"{Fore.MAGENTA+Style.BRIGHT}[ Account{Style.RESET_ALL}"
+                    f"{Fore.WHITE+Style.BRIGHT} {user_name} {Style.RESET_ALL}"
                     f"{Fore.MAGENTA+Style.BRIGHT}] [ Balance{Style.RESET_ALL}"
                     f"{Fore.WHITE+Style.BRIGHT} {mine_info['getCoin']} {Style.RESET_ALL}"
                     f"{Fore.MAGENTA+Style.BRIGHT}]{Style.RESET_ALL}"
@@ -420,10 +422,11 @@ class FreeDOGS:
 
                         user_info = extract_user_data(query)
                         user_id = str(user_info.get('id'))
+                        user_name = str(user_info.get('username'))
                         self.headers = get_headers(user_id)
 
                         try:
-                            self.process_query(query, user_id)
+                            self.process_query(query, user_id, user_name)
                         except Exception as e:
                             self.log(f"{Fore.RED + Style.BRIGHT}An error process_query: {e}{Style.RESET_ALL}")
 
