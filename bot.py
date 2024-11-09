@@ -5,8 +5,10 @@ import urllib.parse
 import hashlib
 from core.helper import get_headers, countdown_timer, extract_user_data, config
 from colorama import *
+from os import system as sys
 from base64 import urlsafe_b64decode
 import random
+from platform import system as s_name
 from datetime import datetime
 import time
 
@@ -458,6 +460,10 @@ class FreeDOGS:
             self.log(f"{Fore.RED + Style.BRIGHT}An error occurred: {e}{Style.RESET_ALL}")
 
 if __name__ == "__main__":
+    if s_name() == 'Windows':
+        sys(f'Free Dogs')
+    else:
+        sys('clear')
     freedogs = FreeDOGS()
     freedogs.clear_terminal()
     freedogs.welcome()
